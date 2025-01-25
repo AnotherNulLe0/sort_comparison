@@ -1,2 +1,2 @@
 python -m venv .venv
-pip install -r requirements.txt
+".venv/scripts/pip.exe" install -r requirements.txt

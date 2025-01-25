@@ -74,6 +74,14 @@ if __name__ == "__main__":
         read_data(argv[2])
 
     elif len(argv) == 2 and (argv[1] == "--clear" or argv[1] == "-c"):
+        files = filter(lambda x: isfile("./results/"+x), listdir("./results/"))
+        latest = max(files)
+        if latest:
+            remove("./results/"+latest)
+            print("Тест удалён.")
+        else:
+            print("Тест не найден.")
+    elif len(argv) == 3 and (argv[1] == "--clear" or argv[1] == "-c") and argv[2] == "--all":
         files = []
         if (files := listdir("./results/")):
             for file in files:
@@ -83,12 +91,12 @@ if __name__ == "__main__":
             print("Тесты не найдены.")
     elif len(argv) == 3 and (argv[1] == "--clear" or argv[1] == "-c"):
         try:
-            remove(f"./results/{argv[1]}")
-            print("Тесты удалены.")
+            remove(f"./results/{argv[2]}")
+            print("Тест удалён.")
         except FileNotFoundError:
-            print("Тесты не найдены.")
+            print("Тест не найден.")
 
     elif len(argv) == 1:
         read_data()
     else:
-        print("Неизвестный флаг.")
+        print("Неверный формат флагов.")

@@ -1,5 +1,6 @@
-from utils import *
-from graph_draw import *
+from .utils import *
+from .cfg import *
+from .graph_draw import *
 from random import randint
 from time import time
 
@@ -8,7 +9,7 @@ def get_efficiency(is_sorted, global_counter, sorting_functions, array_length, s
     for function in sorting_functions:
         efficiency[function.__name__] = [[], []]
 
-    for length in range(step, array_length, step):
+    for length in range(step, array_length+step, step):
         if is_sorted:
             input_data = [i+1 for i in range(length)]
         else:
@@ -21,7 +22,7 @@ def get_efficiency(is_sorted, global_counter, sorting_functions, array_length, s
             except RecursionError:
                 pass
             global_counter.value += 1
-            print(f"\rЗавершено на {global_counter.value*100/(2*len(sorting_functions)*((array_length-step)/step)):.2f}%", end="")
+            print(f"\rЗавершено на {global_counter.value*100/(2*len(sorting_functions)*(array_length/step)):.2f}%", end="")
     # print(f"{'sorted' if is_sorted else 'unsorted'} FINISHED")
     
     return efficiency

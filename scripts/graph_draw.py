@@ -1,13 +1,14 @@
 import matplotlib.pyplot as pyplot
-from utils import SORTING_FUNCTIONS
+from .cfg import SORTING_FUNCTIONS, DOT_SIZE, COLORS
 
 def plot(efficiency, axes):
     colors = {}
-    for func, color in zip(SORTING_FUNCTIONS, [(1, 0, 0), (0, 1, 0), (0, 0, 1), (1, 0.88, 0), (0.65, 0.2, 0.75), (0, 1, 1), (0, 0, 0)]):
+    for func, color in zip(SORTING_FUNCTIONS, COLORS):
         colors[func.__name__] = color
     for key in efficiency:
         # print(f"{key} = {color}")
         line, = axes.plot(efficiency[key][1], efficiency[key][0], color=colors[key])
+        axes.scatter(efficiency[key][1], efficiency[key][0], color=colors[key], sizes=(DOT_SIZE,DOT_SIZE))
         line.set_label(key)
         axes.legend()
 

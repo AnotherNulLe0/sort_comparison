@@ -14,23 +14,41 @@ def plot(efficiency, axes):
 
 
 
-def draw(sorted_efficiency=None, unsorted_efficiency=None):
+def draw(sorted_efficiency=None, unsorted_efficiency=None, sorted_memory=None, unsorted_memory=None):
 
-    fig, ax = pyplot.subplots(ncols=2, nrows=1)
+    fig, ax = pyplot.subplots(ncols=2, nrows=2)
+    ax1 = ax[0][1]
+    ax2 = ax[0][0]
+    ax3 = ax[1][0]
+    ax4 = ax[1][1]
 
-    ax[0].set_ylabel("Время выполнения")
-    ax[0].set_xlabel("Длина массива")
-    ax[0].set_title("Неотсортированного массива")
+    ax1.set_ylabel("Время выполнения")
+    ax1.set_xlabel("Длина массива")
+    ax1.set_title("Отсортированного массива")
 
-    ax[1].set_ylabel("Время выполнения")
-    ax[1].set_xlabel("Длина массива")
-    ax[1].set_title("Отсортированного массива")
+    ax2.set_ylabel("Время выполнения")
+    ax2.set_xlabel("Длина массива")
+    ax2.set_title("Неотсортированного массива")
 
-    plot(unsorted_efficiency, ax[0])
-    plot(sorted_efficiency, ax[1])
+    ax3.set_ylabel("Затраты памяти")
+    ax3.set_xlabel("Длина массива")
+    ax3.set_title("Неотсортированного массива")
 
-    slowest_time = max(ax[0].get_ylim()[1], ax[1].get_ylim()[1])
-    ax[0].set_ylim(0, slowest_time)
-    ax[1].set_ylim(0, slowest_time)
+    ax4.set_ylabel("Затраты памяти")
+    ax4.set_xlabel("Длина массива")
+    ax4.set_title("Отсортированного массива")
+
+    plot(sorted_efficiency, ax1)
+    plot(unsorted_efficiency, ax2)
+    plot(unsorted_memory, ax3)
+    plot(sorted_memory, ax4)
+
+    slowest_time = max(ax1.get_ylim()[1], ax2.get_ylim()[1])
+    ax1.set_ylim(0, slowest_time)
+    ax2.set_ylim(0, slowest_time)
+
+    biggest_mem = max(ax3.get_ylim()[1], ax4.get_ylim()[1])
+    ax3.set_ylim(0, biggest_mem)
+    ax4.set_ylim(0, biggest_mem)
 
     pyplot.show()

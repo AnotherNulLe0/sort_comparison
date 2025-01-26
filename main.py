@@ -65,7 +65,7 @@ def remove_test(path=None, is_all=False):
     elif is_all:
             files = []
             if (files := listdir("./results/")):
-                if promt(f"Удалить все тесты?"):
+                if promt(f"Удалить все тесты?\n  {"\n  ".join(files)}"):
                     for file in files:
                         remove("./results/"+file)
                     print("Тесты удалены.")

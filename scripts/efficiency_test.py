@@ -1,6 +1,5 @@
 from .utils import repeat, mem_repeat, get_percent_template, calc_percent
-from .cfg import *
-from .graph_draw import *
+from .cfg import ARRAY_LENGTH, SORT_REPEATS, STEP, SORTING_FUNCTIONS
 from random import randint
 from time import time
 from multiprocessing import Process, Value

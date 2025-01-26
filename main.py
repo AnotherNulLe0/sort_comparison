@@ -1,6 +1,7 @@
-from scripts.utils import *
-from scripts.graph_draw import *
-from scripts.efficiency_test import *
+from scripts.utils import promt
+from scripts.cfg import ARRAY_LENGTH, SORT_REPEATS, STEP, SORTING_FUNCTIONS
+from scripts.graph_draw import draw
+from scripts.efficiency_test import run
 from sys import argv
 from os import remove, listdir
 from os.path import isfile

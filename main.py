@@ -53,9 +53,11 @@ def read_data(specified_data=None):
     draw(sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory)
 
 def remove_test(path=None, is_all=False):
+    dir = listdir("./results/")
+    dir.remove("placeholder")
     if not is_all and not path:
-        files = filter(lambda x: isfile("./results/"+x), listdir("./results/"))
-        if listdir("./results/"):
+        files = filter(lambda x: isfile("./results/"+x), )
+        if dir:
             latest = max(files)
             if promt(f"Удалить файл \"{latest}.json\"?"):
                 remove(f"./results/{latest}.json")
@@ -64,7 +66,7 @@ def remove_test(path=None, is_all=False):
             print("Тесты не найдены.")
     elif is_all:
             files = []
-            if (files := listdir("./results/")):
+            if (files := dir):
                 if promt(f"Удалить все тесты?\n  {"\n  ".join(files)}"):
                     for file in files:
                         remove("./results/"+file)

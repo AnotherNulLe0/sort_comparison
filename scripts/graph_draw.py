@@ -1,10 +1,10 @@
 import matplotlib.pyplot as pyplot
-from .cfg import SORTING_FUNCTIONS, DOT_SIZE, COLORS
+from .cfg import DOT_SIZE, COLORS
 
 def plot(efficiency, axes):
     colors = {}
-    for func, color in zip(SORTING_FUNCTIONS, COLORS):
-        colors[func.__name__] = color
+    for func, color in zip(efficiency.keys(), COLORS):
+        colors[func] = color
     for key in efficiency:
         # print(f"{key} = {color}")
         line, = axes.plot(efficiency[key][1], efficiency[key][0], color=colors[key])
@@ -47,7 +47,7 @@ def draw(sorted_efficiency=None, unsorted_efficiency=None, sorted_memory=None, u
     ax1.set_ylim(0, slowest_time)
     ax2.set_ylim(0, slowest_time)
 
-    biggest_mem = max(ax3.get_ylim()[1], ax4.get_ylim()[1])
+    biggest_mem = min(ax3.get_ylim()[1], ax4.get_ylim()[1])
     ax3.set_ylim(0, biggest_mem)
     ax4.set_ylim(0, biggest_mem)
 

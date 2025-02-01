@@ -1,10 +1,9 @@
-from scripts.utils import promt
+from scripts.utils import promt, get_latest_file
 from scripts.cfg import ARRAY_LENGTH, SORT_REPEATS, STEP, SORTING_FUNCTIONS
 from scripts.graph_draw import draw
 from scripts.efficiency_test import run
 from sys import argv
 from os import remove, listdir
-from os.path import isfile
 from json import load, dump
 from time import localtime
 
@@ -19,7 +18,7 @@ def test(arr_length=ARRAY_LENGTH, repeats=SORT_REPEATS, step=STEP):
 
 def write_efficiency(sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory):
     cur_time = localtime()
-    cur_time = f"{cur_time.tm_year}-{cur_time.tm_mon}-{cur_time.tm_mday} {cur_time.tm_sec}{cur_time.tm_min}{cur_time.tm_hour}"
+    cur_time = f"{cur_time.tm_year}-{cur_time.tm_mon}-{cur_time.tm_mday} {cur_time.tm_hour}{cur_time.tm_min}{cur_time.tm_sec}"
     buf = {"sorted_time": sorted_efficiency, 
            "unsorted_time": unsorted_efficiency,
            "sorted_memory": sorted_memory,
@@ -37,28 +36,22 @@ def read_data(specified_data=None):
     try:
         path = specified_data
         if not path:
-            files = filter(lambda x: isfile("./results/"+x), listdir("./results/"))
-            latest = max(files)
-            path = latest
+            path = get_latest_file()
         with open(f"./results/{path}", "r") as f:
             result = load(f)
             unsorted_efficiency, sorted_efficiency = result["unsorted_time"], result["sorted_time"]
             unsorted_memory, sorted_memory = result["unsorted_memory"], result["sorted_memory"]
     except (IOError, ValueError):
         print("Данные тестов не были найдены.")
-        if specified_data:
-            return
-        sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory  = test()
-        write_efficiency(sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory)
+        return
     draw(sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory)
 
 def remove_test(path=None, is_all=False):
     dir = listdir("./results/")
     dir.remove("placeholder")
     if not is_all and not path:
-        files = filter(lambda x: isfile("./results/"+x), )
         if dir:
-            latest = max(files)
+            latest = get_latest_file()
             if promt(f"Удалить файл \"{latest}.json\"?"):
                 remove(f"./results/{latest}.json")
                 print("Тест удалён.")

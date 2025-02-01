@@ -1,4 +1,15 @@
 from time import time
+from os import listdir, stat
+from os.path import isfile
+
+def get_latest_file():
+    files = listdir("./results/")
+    files.remove("placeholder")
+    files = filter(lambda x: isfile("./results/"+x), files)
+    creation_dates = {}
+    for file in files:
+        creation_dates[file] = stat(f"./results/{file}").st_birthtime
+    return max(creation_dates, key=lambda x: creation_dates[x])
 
 def promt(text):
     print(text)

@@ -7,13 +7,13 @@
 
 Использование:
 
-`python -m main.py [-r, --read [file=<YEAR-MONTH-DAY HOURMINSEC.json>] | -g, --generate [array-length=1000, [sort-repeats=100], [step=10]] | -c, --clear [file=<YEAR-MONTH-DAY HOURMINSEC.json> | --all]]`
+`python -m main.py [-r, --read [file=<YEAR-MONTH-DAY HOUR-MIN-SEC.json>] | -g, --generate [array-length=1000, [sort-repeats=100], [step=10]] | -c, --clear [file=<YEAR-MONTH-DAY HOUR-MIN-SEC.json> | --all]]`
 
-`-r, --read [file=<YEAR-MONTH-DAY HOURMINSEC.json>]` - просмотреть результаты теста. Если не указан аргумент `[<file>]`, то открывает самый последний тест.
+`-r, --read [file=<YEAR-MONTH-DAY HOUR-MIN-SEC.json>]` - просмотреть результаты теста. Если не указан аргумент `[<file>]`, то открывает самый последний тест.
 
 `-g, --generate [array-length=1000, [sort-repeats=100], [step=10]]` - протестировать функции, указанных в `cfg.py`.
 
-`-c, --clear [file=<YEAR-MONTH-DAY HOURMINSEC.json> | --all]` - удалить результаты теста. Если не указан аргумент `[<file>]`, то удаляет самый последний тест. Если указать --all, то удаляет все тесты.
+`-c, --clear [file=<YEAR-MONTH-DAY HOUR-MIN-SEC.json> | --all]` - удалить результаты теста. Если не указан аргумент `[<file>]`, то удаляет самый последний тест. Если указать --all, то удаляет все тесты.
 
 ### Дальнейшее использование
 В папке `scripts/` хранятся компоненты программы:

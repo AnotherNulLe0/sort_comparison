@@ -18,7 +18,7 @@ def test(arr_length=ARRAY_LENGTH, repeats=SORT_REPEATS, step=STEP):
 
 def write_efficiency(sorted_efficiency, unsorted_efficiency, sorted_memory, unsorted_memory):
     cur_time = localtime()
-    cur_time = f"{cur_time.tm_year}-{cur_time.tm_mon}-{cur_time.tm_mday} {cur_time.tm_hour}{cur_time.tm_min}{cur_time.tm_sec}"
+    cur_time = f"{cur_time.tm_year}-{cur_time.tm_mon:0>2}-{cur_time.tm_mday:0>2} {cur_time.tm_hour:0>2}-{cur_time.tm_min:0>2}-{cur_time.tm_sec:0>2}"
     buf = {"sorted_time": sorted_efficiency, 
            "unsorted_time": unsorted_efficiency,
            "sorted_memory": sorted_memory,
